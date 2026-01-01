@@ -17,8 +17,9 @@ class RandomWalk:
         self.points = Points()
         self.line = Line()
 
-        # Initialize with empty Figure and Axes objects
-        self.fig, self.ax = plt.subplots()
+        # Initialize with None
+        self.fig = None
+        self.ax = None
 
     def set_steps(self, amount: int) -> None:
         """Set number of points (steps) to generate."""
