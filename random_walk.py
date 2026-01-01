@@ -1,9 +1,13 @@
-import matplotlib
+from typing import TYPE_CHECKING
+
 import matplotlib.pyplot as plt
 
 from rw_generator import RWGenerator
 from rw_settings import Walk
 from rw_graph_properties import Graph, Points, Line
+
+if TYPE_CHECKING:
+    import matplotlib
 
 
 class RandomWalk:
@@ -25,8 +29,8 @@ class RandomWalk:
         """Set number of points (steps) to generate."""
         self.points.amount = amount
 
-    def build(self) -> tuple[matplotlib.pyplot.Figure, matplotlib.pyplot.Axes]:
-        """Build random walk graph."""
+    def build(self) -> tuple[matplotlib.pyplot.Figure, matplotlib.pyplot.Axes, tuple[list, list]]:
+        """Get random walk values and build the walk graph."""
         rwg = RWGenerator()
         rwg.set(
             self.walk.steps,
@@ -106,14 +110,14 @@ class RandomWalk:
             )
 
         self.fig, self.ax = (fig, ax)
-        return self.fig, self.ax
+        return self.fig, self.ax, (rwg.x_values, rwg.y_values)
 
     @staticmethod
     def show() -> None:
-        """Show the random walk graph."""
+        """Show the random walk figure."""
         plt.show()
 
     @staticmethod
     def close() -> None:
-        """Close the random walk graph."""
+        """Close the random walk figure window."""
         plt.close()
